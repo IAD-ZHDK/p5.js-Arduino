@@ -50,7 +50,7 @@ function draw() {
 	}
 }
 
-function mousePressed() {
+function keyPressed() {
     let fs = fullscreen();
     fullscreen(!fs);
   }
