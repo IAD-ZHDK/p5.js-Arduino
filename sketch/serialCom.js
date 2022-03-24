@@ -3,6 +3,7 @@
 let msg;
 let serialOptions = { baudRate: 9600 };
 let serial;
+let serialConnected = false;
 let button;
 
 let SensorData = 0;
@@ -43,6 +44,7 @@ async function connectPort() {
  */
 function onSerialConnectionOpened(eventSender) {
   console.log("Serial connection opened successfully");
+  serialConnected = true
   button.remove();
 }
 
@@ -51,6 +53,7 @@ function onSerialConnectionOpened(eventSender) {
  */
 function onSerialConnectionClosed(eventSender) {
   console.log("onSerialConnectionClosed");
+  serialConnected = false;
   button = createButton('click me');
   button.position(10, 10);
   button.mousePressed(connectPort);

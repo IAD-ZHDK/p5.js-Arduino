@@ -36,7 +36,10 @@ function draw() {
 	for (let y = 0; y < buffer.height; y++) {
 		beginShape();
 		for (let x = 0; x < buffer.width; x++) {
-      let normalised = (SensorData/1024)
+			let normalised = (SensorData/1024)
+			if (!serialConnected) {
+				normalised = (mouseX/width)
+			}
 			let h = imagePixels[x][y]*normalised*4; // we modify the height of our sudo 3D result using the mouseX¨
       let noiseVolume = (1.3-normalised)*10;
 			let noiseMouse = noise(x*5, y*5, frameCount*(0.1+normalised))*noiseVolume; // here the noise value is tweeked with some modifiers to the result I was looking for
