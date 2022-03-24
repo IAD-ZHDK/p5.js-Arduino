@@ -26,13 +26,13 @@ void loop() {
   
   int sensorValue = analogRead(INPUT_PIN);
   // print the results to the Serial Monitor:
-  sensorFiltered = sensorFiltered*0.9;
-  sensorFiltered += sensorValue*0.1;
+  //sensorFiltered = sensorFiltered*0.9;
+  //sensorFiltered += sensorValue*0.1;
   
-  if (lastSensorValue != sensorFiltered) {
-    Serial.println(sensorFiltered);
-    lastSensorValue = sensorFiltered;
-  }
+ // if (lastSensorValue != sensorFiltered) {
+    Serial.println(sensorValue);
+   // lastSensorValue = sensorFiltered;
+  //}
   
   // wait 2 milliseconds before the next loop for the analog-to-digital
   // converter to settle after the last reading:
