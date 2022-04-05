@@ -1,11 +1,6 @@
 /* jshint esversion: 8 */
 
 var buffer;
-let imagePixels = [];
-
-function preload() {
-  buffer = loadImage('img.png');
-}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);

@@ -1,8 +1,8 @@
-# MA-Studio-1--Physical-Computing
+# Arduino to P5js example 
 
-An example for connecting Arduino with P5js over Serial 
+Some simple examples for connecting Arduino with P5js over Serial 
 
-Currently, Web Serial only runs on Internet Explorer and Chrome, so to use it, you need to install Chrome (or a Chrome-based) browser. To check if your browser supports WebSerial open a console (cmd + option+ i on Mac or ctrl + alt + i on Windows) and type in:
+Currently, Web Serial only runs on Internet Explorer and Chrome, so to use it, you need to install Chrome (or a Chrome-based) browser. To check if your browser supports WebSerial open a console the browser (cmd + option+ i on Mac or ctrl + alt + i on Windows) and type in:
 
 await navigator.serial.requestPort();
 
