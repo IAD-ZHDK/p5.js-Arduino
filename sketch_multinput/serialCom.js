@@ -5,10 +5,13 @@ let serialOptions = { baudRate: 9600 };
 let serial;
 let serialConnected = false;
 let button;
-
+let dataLength = 0;
 let SensorData = "";
+let dataAvailable = false;
+let filterArray = []
 
-function setupSerial() {
+function setupSerial(length) {
+  dataLength = length;
   // Setup Web Serial using serial.js
   serial = new Serial();
   serial.on(SerialEvents.CONNECTION_OPENED, onSerialConnectionOpened);
@@ -19,6 +22,9 @@ function setupSerial() {
   button = createButton('connect to serial');
   button.position(10, 10);
   button.mousePressed(connectPort);
+  for (let i = 0; i < length; i++) { // change the max output from 10 to however many values are expexted
+    filterArray[i] = 1.0
+  }
 }
 
 
@@ -68,6 +74,19 @@ function onSerialConnectionClosed(eventSender) {
 function onSerialDataReceived(eventSender, newData) {
   console.log("d:", newData);
  // msg.html("onSerialDataReceived: " + newData);
- SensorData = newData;
+  SensorData = newData;
+
+  if (SensorData) {
+    dataAvailable = true;
+    var dataArray = SensorData.split(','); // split the incomming string into aray items based on comma seperation
+    dataLength = dataArray.length
+    // filter 
+    for (let i = 0; i < dataLength; i++) {
+      let value = parseFloat(dataArray[i]); // we expect floats in this example 
+      filterArray[i] = filterArray[i] * 0.95
+      filterArray[i] += value * 0.05
+      value = parseFloat(dataArray[i]);
+    }
+  }
 }
 
