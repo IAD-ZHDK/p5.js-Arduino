@@ -83,6 +83,9 @@ function onSerialDataReceived(eventSender, newData) {
     // filter 
     for (let i = 0; i < dataLength; i++) {
       let value = parseFloat(dataArray[i]); // we expect floats in this example 
+      if (!filterArray[i]) {
+        filterArray[i] = 1.0
+      }
       filterArray[i] = filterArray[i] * 0.95
       filterArray[i] += value * 0.05
       value = parseFloat(dataArray[i]);
