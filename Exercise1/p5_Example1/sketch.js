@@ -7,18 +7,14 @@ var sendButton;
 var connect = false;
 let isConnected = false;
 
+let timeBetweenDataSend = 500; // 100ms
+let lastDataSendTime = 0; // init the last time data was sent
+
 function setup() {
   createCanvas(400,400);
   background(255);
   gui = createGui("");
   gui.addGlobals('connect');
-
-  sendButton = createButton("OFF");
-  sendButton.position(20, 100);
-  sendButton.size(200, 100);
-  sendButton.style("font-family", "Comic Sans MS");
-  sendButton.style("font-size", "40px");
-  sendButton.mousePressed(serialWriteNumberData);
 
   // Setup Web Serial using serial.js
   serial = new Serial();
@@ -33,7 +29,7 @@ function setup() {
 
 
 function draw() {
-
+  background(0)
   // Check if connect button is pressed and the connection is not established
   if (connect && !isConnected) {
     connectPort();
@@ -43,6 +39,16 @@ function draw() {
     isConnected = false; 
   }
 
+  let bright = map(mouseX, 0, width, 0, 255);
+  bright = constrain(bright, 0,255);
+  //send values to arduino
+
+  // send data every x seconds defined by timeBetweenDataSend value
+    let currentSendTime = millis() - lastDataSendTime;
+    if(currentSendTime > timeBetweenDataSend){
+      serialWriteNumberData(bright);
+      lastDataSendTime = millis();
+    }
 }
 
 async function connectPort() {
@@ -81,14 +87,9 @@ function onSerialDataReceived(eventSender, newData) {
 }
  
 // send data to serial port
-async function serialWriteNumberData(){
-  if(sendData){
-    serial.writeLine("0");        
-    sendButton.html('OFF');
-  }else{
-    serial.writeLine("1");
-    sendButton.html('ON');
-  }
-  sendData = !sendData;
+async function serialWriteNumberData(val){
+    console.log(val)
+    serial.writeLine(val);
+    //alt shift 7 to do a backslash
 }
 

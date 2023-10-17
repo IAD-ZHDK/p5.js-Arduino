@@ -2,7 +2,7 @@
 #define OUTPUT_PIN 5
 
 int incomingValues[NUM_VALUES];
-const int DELAY_MS = 50;
+const int DELAY_MS = 500;
 
 void setup() {
   Serial.begin(9600);
@@ -15,7 +15,7 @@ void loop() {
     // read string until the end of the line
     String rcvdSerialData = Serial.readStringUntil('\n');
     // set the output value of PWM pin
-    int ouputValue =rcvdSerialData.toInt();
+    int ouputValue = rcvdSerialData.toInt();
     analogWrite(OUTPUT_PIN, ouputValue);
     Serial.println(ouputValue);
   }

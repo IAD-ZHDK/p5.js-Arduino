@@ -1,6 +1,6 @@
 
-#define NUM_VALUES 5
-#define OUTPUT_PIN A0
+#define NUM_VALUES 1
+#define OUTPUT_PIN 5
 
 int incomingValues[NUM_VALUES];
 const int DELAY_MS = 500;

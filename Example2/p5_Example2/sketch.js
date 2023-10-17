@@ -28,6 +28,7 @@ function setup() {
   serial.on(SerialEvents.ERROR_OCCURRED, onSerialErrorOccurred);
   // Add <p> element to provide messages. This is optional.
   msg = createP("");
+
 }
 
 function draw() {
